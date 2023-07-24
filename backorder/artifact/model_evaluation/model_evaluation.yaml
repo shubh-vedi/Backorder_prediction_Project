@@ -1,0 +1,15 @@
+best_model:
+  model_path: C:\Users\akshay\Desktop\project\final_back_order_prediction\backorder\artifact\model_trainer\2023-07-24-12-15-40\trained_model\model.pkl
+history:
+  2023-07-24-01-39-29:
+    model_path: C:\Users\akshay\Desktop\project\final_back_order_prediction\backorder\artifact\model_trainer\2023-07-24-01-30-52\trained_model\model.pkl
+  2023-07-24-10-38-39:
+    model_path: C:\Users\akshay\Desktop\project\final_back_order_prediction\backorder\artifact\model_trainer\2023-07-24-01-39-29\trained_model\model.pkl
+  2023-07-24-11-23-10:
+    model_path: C:\Users\akshay\Desktop\project\final_back_order_prediction\backorder\artifact\model_trainer\2023-07-24-10-38-39\trained_model\model.pkl
+  2023-07-24-11-55-16:
+    model_path: C:\Users\akshay\Desktop\project\final_back_order_prediction\backorder\artifact\model_trainer\2023-07-24-11-23-10\trained_model\model.pkl
+  2023-07-24-11-58-55:
+    model_path: C:\Users\akshay\Desktop\project\final_back_order_prediction\backorder\artifact\model_trainer\2023-07-24-11-55-16\trained_model\model.pkl
+  2023-07-24-12-15-40:
+    model_path: C:\Users\akshay\Desktop\project\final_back_order_prediction\backorder\artifact\model_trainer\2023-07-24-11-58-55\trained_model\model.pkl

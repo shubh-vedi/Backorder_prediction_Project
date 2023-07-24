@@ -1,0 +1,189 @@
+{% extends 'header.html' %}
+
+{% block head %}
+
+
+<title>backorder Estimator</title>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
+
+
+        <form action="/predict" method="post">
+            <legend>backorder Estimation Form</legend>
+            <div class="mb-3">
+                <label class="form-label">national_inv</label>
+                <input class="form-control" type="text" name="national_inv" placeholder="Enter a value of national_inv"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">lead_time</label>
+                <input class="form-control" type="text" name="lead_time" placeholder="Enter a value of lead_time"
+                    required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">in_transit_qty</label>
+                <input class="form-control" type="text" name="in_transit_qty"
+                    placeholder="Enter a value of in_transit_qty" />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">forecast_3_month</label>
+                <input class="form-control" type="text" name="forecast_3_month" placeholder="Enter a value of forecast_3_month "
+                    required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">forecast_6_month</label>
+                <input class="form-control" type="text" name="forecast_6_month"
+                    placeholder="Enter a value of forecast_6_month" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">forecast_9_month</label>
+                <input class="form-control" type="text" name="forecast_9_month" placeholder="Enter a value of forecast_9_month "
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">sales_1_month</label>
+                <input class="form-control" type="text" name="sales_1_month" placeholder="Enter a value of sales_1_month"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">sales_3_month</label>
+                <input class="form-control" type="text" name="sales_3_month"
+                    placeholder="Enter a value of sales_3_month" required />
+            
+            </div>
+            <div class="mb-3">
+                <label class="form-label">sales_6_month</label>
+                <input class="form-control" type="text" name="sales_6_month"
+                    placeholder="Enter a value of sales_6_month" required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">sales_9_month</label>
+                <input class="form-control" type="text" name="sales_9_month"
+                    placeholder="Enter a value of sales_9_month" required />  
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">min_bank</label>
+                <input class="form-control" type="text" name="min_bank"
+                    placeholder="Enter a value of sales_9_month" required /> 
+
+            </div>
+            <div class="mb-3">
+                 <label class="form-label">pieces_past_due</label>
+                 <input class="form-control" type="text" name="pieces_past_due"
+                    placeholder="Enter a value of pieces_past_due" required /> 
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">perf_6_month_avg</label>
+                <input class="form-control" type="text" name="perf_6_month_avg"
+                    placeholder="Enter a value of perf_6_month_avg" required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">perf_12_month_avg</label>
+                <input class="form-control" type="text" name="perf_12_month_avg"
+                    placeholder="Enter a value of perf_12_month_avg" required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">local_bo_qty</label>
+                <input class="form-control" type="text" name="local_bo_qty"
+                    placeholder="Enter a value of local_bo_qty" required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">deck_risk</label>
+                <input class="form-control" type="text" name="deck_risk"
+                     placeholder="Enter a value of local_bo_qty" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">oe_constraint</label>
+                <input class="form-control" type="text" name="oe_constraint"
+                     placeholder="Enter a value of local_bo_qty" required />
+                     
+            </div>
+            <div class="mb-3">
+                <label class="form-label">ppap_risk</label>
+                <input class="form-control" type="text" name="ppap_risk"
+                    placeholder="Enter a value of local_bo_qty" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">stop_auto_buy</label>
+                <input class="form-control" type="text" name="stop_auto_buy"
+                    placeholder="Enter a value of local_bo_qty" required />
+
+            
+            </div>
+            <div class="mb-3">
+                <label class="form-label">rev_stop</label>
+                <input class="form-control" type="text" name="rev_stop"
+                    placeholder="Enter a value of local_bo_qty" required />
+
+
+
+            </div>
+            <div class="mb-3">
+
+                <input class="btn btn-primary" type="submit" value="Predict went on backorder" required />
+            </div>
+
+        </form>
+    </div>
+#create a table
+    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+              Backorder
+            </div>
+            <div class="card-body">
+        {% if context['backorder_data'] is not none %}
+        <table class="table table-striped">
+            <caption>backorder Prediction </caption>
+            <tr>
+                <th>Input Feature</th>
+                <th>Feature Value</th>
+
+            </tr>
+            {% for column,value in context['backorder_data'].items() %}
+
+
+
+            <tr>
+                <td>{{column}}</td>
+                <td>{{value[0]}}</td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+
+                <td>went_on_backorder </td>
+                <td>
+                    {{ context['went_on_backorder'] }}
+                </td>
+            </tr>
+        </table>
+
+        {% else %}
+       
+              <h5 class="card-title">Submit Form</h5>
+              <p class="card-text">Kindly provide necessary information to estimate backorder</p>
+            
+         
+
+        {% endif %}
+        Go to <a href="/" class="btn btn-primary">Home</a>
+    </div>
+</div>
+    </div>
+
+    {% endblock %}
