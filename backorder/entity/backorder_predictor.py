@@ -10,7 +10,7 @@ import pandas as pd
 class backorderData:
 
     def __init__(self,
-                   sku: object,
+                   
                   national_inv: float,
                   lead_time: float,
                    in_transit_qty: float,
@@ -32,10 +32,9 @@ class backorderData:
                  ppap_risk: object,
                  stop_auto_buy: object,
                  rev_stop: object,
-                 went_on_backorder: object
+                 went_on_backorder: object=None
                  ):
         try:
-            self.sku = sku
             self.national_inv = national_inv
             self.lead_time=lead_time
             self.in_transit_qty = in_transit_qty
@@ -50,7 +49,7 @@ class backorderData:
             self.potential_issue=potential_issue
             self.pieces_past_due=pieces_past_due
             self.perf_6_month_avg=perf_6_month_avg
-            self.perf_9_month_avg=perf_12_month_avg
+            self.perf_12_month_avg=perf_12_month_avg
             self.local_bo_qty=local_bo_qty
             self.deck_risk=deck_risk
             self.oe_constraint=oe_constraint
@@ -75,7 +74,6 @@ class backorderData:
     def get_backorder_data_as_dict(self):
         try:
             input_data = {
-                 "sku":[self.sku],
                  "national_inv": [self.national_inv],
                  "lead_time":[self.lead_time],
                  "in_transit_qty":[self.in_transit_qty],
@@ -94,7 +92,7 @@ class backorderData:
                  "local_bo_qty":[self.local_bo_qty],
                  "deck_risk":[self.deck_risk],
                  "oe_constraint":[self.oe_constraint],
-                  "ppap_risk":[self.ppap_risk],
+                 "ppap_risk":[self.ppap_risk],
                  "stop_auto_buy":[self.stop_auto_buy],
                  "rev_stop":[self.rev_stop]
            
@@ -127,6 +125,6 @@ class backorderPredictor:
             model_path = self.get_latest_model_path()
             model = load_object(file_path=model_path)
             went_on_backorder = model.predict(X)
-            return 
+            return went_on_backorder
         except Exception as e:
             raise backorderException(e, sys) from e

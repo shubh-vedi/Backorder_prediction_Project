@@ -11,6 +11,7 @@ from backorder.constant import CONFIG_DIR, get_current_time_stamp
 from backorder.pipeline.pipeline import Pipeline
 from backorder.entity.backorder_predictor import backorderPredictor, backorderData
 from flask import send_file, abort, render_template
+import pandas as pd
 
 #intialization for flask application
 ROOT_DIR = os.getcwd()
@@ -104,32 +105,32 @@ def predict():     #go to predict url
         BACKORDER_DATA_KEY: None,
         WENT_ON_BACK_ORDER_KEY: None
     }
-
-    if request.method == 'POST':
+    try:
+        if request.method == 'POST':
       
-        national_inv= float(request.form['national_inv'])
-        lead_time=float(request.form['lead_time'])
-        in_transit_qty=float(request.form['in_transit_qty'])
-        forecast_3_month=float(request.form['forecast_3_month'])
-        forecast_6_month=float(request.form['forecast_6_month'])
-        forecast_9_month=float(request.form['forecast_9_month'])
-        sales_1_month=float(request.form['sales_1_month'])
-        sales_3_month=float(request.form['sales_3_month'])
-        sales_6_month=float(request.form['sales_6_month'])
-        sales_9_month=float(request.form['sales_9_month'])
-        min_bank=float(request.form['min_bank'])
-        potential_issue=request.form['potential_issue']
-        pieces_past_due=float(request.form['pieces_past_due'])
-        perf_6_month_avg=float(request.form['perf_6_month_avg'])
-        perf_12_month_avg=float(request.form['perf_12_month_avg'])
-        local_bo_qty=float(request.form['local_bo_qty'])
-        deck_risk=request.form['deck_risk']
-        oe_constraint=request.form['oe_constraint']
-        ppap_risk=request.form['ppap_risk']
-        stop_auto_buy=request.form['stop_auto_buy']
-        rev_stop=request.form['rev_stop']
+           national_inv= float(request.form['national_inv'])
+           lead_time=float(request.form['lead_time'])
+           in_transit_qty=float(request.form['in_transit_qty'])
+           forecast_3_month=float(request.form['forecast_3_month'])
+           forecast_6_month=float(request.form['forecast_6_month'])
+           forecast_9_month=float(request.form['forecast_9_month'])
+           sales_1_month=float(request.form['sales_1_month'])
+           sales_3_month=float(request.form['sales_3_month'])
+           sales_6_month=float(request.form['sales_6_month'])
+           sales_9_month=float(request.form['sales_9_month'])
+           min_bank=float(request.form['min_bank'])
+           potential_issue=request.form['potential_issue']
+           pieces_past_due=float(request.form['pieces_past_due'])
+           perf_6_month_avg=float(request.form['perf_6_month_avg'])
+           perf_12_month_avg=float(request.form['perf_12_month_avg'])
+           local_bo_qty=float(request.form['local_bo_qty'])
+           deck_risk=request.form['deck_risk']
+           oe_constraint=request.form['oe_constraint']
+           ppap_risk=request.form['ppap_risk']
+           stop_auto_buy=request.form['stop_auto_buy']
+           rev_stop=request.form['rev_stop']
 
-        backorder_data = backorderData(national_inv	=national_inv,
+           backorder_data = backorderData(national_inv=national_inv,
                                       lead_time	= lead_time,
                                       in_transit_qty=in_transit_qty,	
                                       forecast_3_month=forecast_3_month,
@@ -149,18 +150,57 @@ def predict():     #go to predict url
                                       oe_constraint=oe_constraint,
                                       ppap_risk=ppap_risk,
                                       stop_auto_buy=stop_auto_buy,
-                                      rev_stop=rev_stop
+                                      rev_stop=rev_stop,
                                    )
-        backorder_df = backorder_data.get_backorder_input_data_frame() #calling function from backorder predictor entity to save data frame
-        backorder = backorderPredictor(model_dir=MODEL_DIR) #save model directory
-        went_on_backorder = backorder.predict(X=backorder_df)
-        context = {
-            BACKORDER_DATA_KEY: backorder_data.get_backorder_data_as_dict(),
-            WENT_ON_BACK_ORDER_KEY :went_on_backorder ,
-        }
-        return render_template('predict.html', context=context)
-    return render_template("predict.html", context=context)
+           backorder_df = backorder_data.get_backorder_input_data_frame() #calling function from backorder predictor entity to save data frame
+           backorder = backorderPredictor(model_dir=MODEL_DIR) #save model directory
+           went_on_backorder = backorder.predict(X=backorder_df)
+           context = {
+                 BACKORDER_DATA_KEY: backorder_data.get_backorder_data_as_dict(),
+                 WENT_ON_BACK_ORDER_KEY :went_on_backorder ,
+              }
+           return render_template('predict.html', context=context)
+        return render_template("predict.html", context=context)
 
+    except  Exception as e:
+        logging.exception(e)
+        return str(e)
+"""
+@app.route('/predict', methods=['POST'])
+def predict():
+    features = ['national_inv', 'lead_time', 'in_transit_qty', 'forecast_3_month',
+       'forecast_6_month', 'forecast_9_month', 'sales_1_month',
+       'sales_3_month', 'sales_6_month', 'sales_9_month', 'min_bank',
+       'potential_issue', 'pieces_past_due', 'perf_6_month_avg',
+       'perf_12_month_avg', 'local_bo_qty', 'deck_risk', 'oe_constraint',
+       'ppap_risk', 'stop_auto_buy', 'rev_stop']
+
+    input_data = pd.DataFrame(columns=features)
+    input_row = {}
+    for feature in features:
+        input_value = request.form.get(feature)
+        try:
+            input_value = int(input_value)
+        except ValueError:
+            input_value = 0
+        input_row[feature] = [input_value]
+    input_data = pd.DataFrame.from_dict(input_row)
+    # Perform prediction using the loaded model
+    if os.path.exists(MODEL_DIR):
+        predictor = backorderPredictor(model_dir=MODEL_DIR)
+        prediction = predictor.predict(input_data)
+    else:
+        prediction = None
+    
+    if prediction is not None:
+        if prediction == 0:
+            result = 'Not Default'
+        else:
+            result = 'Default'
+    else:
+        result = None
+    return render_template('predict.html', prediction_result=result )
+"""
 
 @app.route('/saved_models', defaults={'req_path': 'saved_models'})
 @app.route('/saved_models/<path:req_path>')
