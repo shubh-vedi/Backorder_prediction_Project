@@ -6,7 +6,7 @@ from backorder.util.util import read_yaml_file
 from backorder.constant import *
 import os,sys, json
 import pandas  as pd
-from IPython.display import display
+
 
 """
 from evidently.model_profile import Profile
