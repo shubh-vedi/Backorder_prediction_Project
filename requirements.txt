@@ -9,4 +9,5 @@ dill
 matplotlib
 numba
 xlrd
+imblearn
 # -e .
