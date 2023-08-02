@@ -17,7 +17,8 @@ from backorder.util.util import read_yaml_file, save_object, save_numpy_array_da
 from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import RandomUnderSampler
 from imblearn.pipeline import Pipeline as ImblearnPipeline
-from collections import Counter
+
+
 
 class DataTransformation:
 
@@ -48,7 +49,7 @@ class DataTransformation:
 
             cat_pipeline = Pipeline(steps=[
                 ('impute', SimpleImputer(strategy="most_frequent")),
-                ('one_hot_encoder', OneHotEncoder(sparse=False)),
+                ('one_hot_encoder', OneHotEncoder(sparse_output=False)),
                 ('scaler', StandardScaler()),
             ])
 
