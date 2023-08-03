@@ -10,5 +10,5 @@ matplotlib
 numba
 xlrd
 imblearn
-IPython
+ipython
 # -e .
