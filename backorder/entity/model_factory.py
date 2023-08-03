@@ -99,8 +99,8 @@ def evaluate_classification_model(model_list: list, X_train:np.ndarray, y_train:
             #if model accuracy is greater than base accuracy and train and test score is within certain thershold
             #we will accept that model as accepted model
             if model_accuracy >= base_accuracy and diff_test_train_acc < 0.05:
-                #if base accuracy will update to model accuracy , any model comes below this accuracy , we wont accept
-                base_accuracy = model_accuracy #updating base accuracy with model accuracy it wont be same as we have defined in 1t iteration
+                # base accuracy will update to model accuracy , any model comes below this accuracy , we wont accept
+                base_accuracy = model_accuracy #updating base accuracy with model accuracy it wont be same as we have defined in 1st iteration
                 metric_info_artifact = MetricInfoArtifact(model_name=model_name,
                                                         model_object=model,
                                                         train_f1_score=train_f1_score,
@@ -207,8 +207,8 @@ def get_sample_model_config_yaml_file(export_dir: str):
                 MODULE_KEY: "sklearn.model_selection",
                 CLASS_KEY: "GridSearchCV",
                 PARAM_KEY: {
-                    "cv": 3,
-                    "verbose": 1
+                    "cv": 5,
+                    "verbose": 3
                 }
 
             },
@@ -419,7 +419,7 @@ class ModelFactory:
 
     @staticmethod
     def get_best_model_from_grid_searched_best_model_list(grid_searched_best_model_list: List[GridSearchedBestModel],
-                                                          base_accuracy=0.6
+                                                          base_accuracy=0.45
                                                           ) -> BestModel:
         try:
             best_model = None
@@ -436,7 +436,7 @@ class ModelFactory:
         except Exception as e:
             raise backorderException(e, sys) from e
 
-    def get_best_model(self, X, y,base_accuracy=0.6) -> BestModel:
+    def get_best_model(self, X, y,base_accuracy=0.45) -> BestModel:
         try:
             logging.info("Started Initializing model from config file")
             initialized_model_list = self.get_initialized_model_list() #getting model list using  and passing parameter in get_initialized_model_list function 

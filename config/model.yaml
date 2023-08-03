@@ -10,22 +10,6 @@ grid_search:
 
 model_selection:
   module_0:
-    class: LogisticRegression
-    module: sklearn.linear_model
-    params:
-      penalty: l2
-      C: 0.1
-    search_param_grid:
-      penalty: 
-        - l2 # Test different penalty options
-      C: 
-        - 0.1 # Test different regularization strengths
-      solver: 
-        - liblinear  # Test different solvers
-      max_iter:
-        - 1000
-
-  module_1:
     class: RandomForestClassifier
     module: sklearn.ensemble
     params: 
@@ -35,44 +19,24 @@ model_selection:
       n_estimators: 
         - 50 # Test different numbers of trees
       max_depth: 
-        - 2
         - 10 # Test different maximum tree depths
       min_samples_split: 
-        - 2
-        - 5 # Test different minimum samples for split
+        - 2  # Test different minimum samples for split
+        
 
-  module_2:
+  module_1:
     class: DecisionTreeClassifier
     module: sklearn.tree
     params:
       random_state: 0 
     search_param_grid:
       criterion: 
-        - gini
         - entropy
       max_depth:
-        - 7
         - 10
       min_samples_split:
-        - 2
         - 5
       max_features:
-        - 9
         - 7
 
-  module_3:
-    class: SVC
-    module: sklearn.svm
-    params:
-      random_state: 0
-    search_param_grid:
-      kernel: 
-        - linear
-        - rbf 
-      C:
-        - 0.1
-        - 1.0
-        - 3
-      gamma:
-        - scale
-        - auto
+  
