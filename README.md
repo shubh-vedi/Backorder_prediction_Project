@@ -8,11 +8,11 @@ https://clipchamp.com/watch/l1kn991yjXG
 ```
 # AWS Deployment Link :
 
-AWS Elastic Beanstalk link : [[http://gemstonepriceutkarshgaikwad-env.eba-7zp3wapg.ap-south-1.elasticbeanstalk.com/]](http://gemstonepriceutkarshgaikwad-env.eba-7zp3wapg.ap-south-1.elasticbeanstalk.com/)
+AWS Elastic Beanstalk link : [[http://backorderpredictionmodel1-env.eba-q9jftgg2.ap-south-1.elasticbeanstalk.com/]](http://backorderpredictionmodel1-env.eba-q9jftgg2.ap-south-1.elasticbeanstalk.com/)
 
 # Screenshot of UI
 
-![HomepageUI](./Screenshots/HomepageUI.jpg)
+![HomepageUI](Screenshots/photo_2023-08-07_18-15-54.jpg)
 
 
 ## Variables
