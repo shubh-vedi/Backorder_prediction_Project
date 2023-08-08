@@ -6,7 +6,13 @@ This project aims to predict the likelihood of backorders for products in a supp
 ```bash
 https://clipchamp.com/watch/l1kn991yjXG
 ```
+# AWS Deployment Link :
 
+AWS Elastic Beanstalk link : [[http://gemstonepriceutkarshgaikwad-env.eba-7zp3wapg.ap-south-1.elasticbeanstalk.com/]](http://gemstonepriceutkarshgaikwad-env.eba-7zp3wapg.ap-south-1.elasticbeanstalk.com/)
+
+# Screenshot of UI
+
+![HomepageUI](./Screenshots/HomepageUI.jpg)
 
 
 ## Variables
