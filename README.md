@@ -3,7 +3,8 @@
 This project aims to predict the likelihood of backorders for products in a supply chain using machine learning techniques. Backorders occur when a product is temporarily out of stock, and customers need to wait for it to become available again. By predicting potential backorders, businesses can proactively manage their inventory and improve customer satisfaction.
 
 ## Project Demo Video Link :
-[[Screenshots/Backorder Prediction.mp4]](Screenshots/Backorder Prediction.mp4)
+<iframe width="560" height="315" src="Screenshots/Backorder Prediction.mp4" frameborder="0" allowfullscreen></iframe>
+
 
 
 # AWS Deployment Link :
