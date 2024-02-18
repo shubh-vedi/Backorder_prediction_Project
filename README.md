@@ -4,7 +4,7 @@ This project aims to predict the likelihood of backorders for products in a supp
 
 ## Project Demo Video Link :
 
-https://github.com/shubh-vedi/Backorder_prediction_Project/issues/1#issue-1841347829
+[https://github.com/shubh-vedi/Backorder_prediction_Project/issues/1#issue-1841347829]
 
 
 # Screenshot of UI
