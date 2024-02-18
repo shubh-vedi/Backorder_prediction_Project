@@ -4,13 +4,8 @@ This project aims to predict the likelihood of backorders for products in a supp
 
 ## Project Demo Video Link :
 
-[(https://github.com/shubh-vedi/fitness_chatbot_LLM.git)
-](video_2024-02-18_15-10-41.mp4)
+https://github.com/shubh-vedi/Backorder_prediction_Project/issues/1#issue-1841347829
 
-
-# AWS Deployment Link :
-
-AWS LightSail link : 
 
 # Screenshot of UI
 
